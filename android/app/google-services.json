@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "278028596694",
+    "firebase_url": "https://first-firebase-1cb9e.firebaseio.com",
+    "project_id": "first-firebase-1cb9e",
+    "storage_bucket": "first-firebase-1cb9e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:278028596694:android:0ff1d887d1a38236262077",
+        "android_client_info": {
+          "package_name": "com.tankiem.fiebase1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "278028596694-to8074ij3q97fsu9rj6kkqo92q6r6mcp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiQnVGPir8KhjxLZy3xK_6S4YxyQhRZ54"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "278028596694-to8074ij3q97fsu9rj6kkqo92q6r6mcp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:278028596694:android:9a439b987280f479262077",
+        "android_client_info": {
+          "package_name": "com.tankiem.icanproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "278028596694-to8074ij3q97fsu9rj6kkqo92q6r6mcp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiQnVGPir8KhjxLZy3xK_6S4YxyQhRZ54"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "278028596694-to8074ij3q97fsu9rj6kkqo92q6r6mcp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
