@@ -3,10 +3,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:icanuser/app/practice.dart';
-import 'package:icanuser/app/profile.dart';
-import 'package:icanuser/consts.dart';
-import 'chat.dart';
+
+import 'consts.dart';
+// import 'package:icanuser/app/practice.dart';
+// import 'package:icanuser/app/profile.dart';
+// import 'package:icanuser/consts.dart';
+// import 'chat.dart';
 
 
 /// WelcomeScreen
@@ -19,9 +21,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   int index = 1;
 
   List<Widget> listChildWidget = [
-    Chat(),
-    PracticeScreen(),
-    Profile(),
+    // Chat(),
+    // PracticeScreen(),
+    // Profile(),
   ];
 
   Future<bool> pressedBack(){
@@ -57,7 +59,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         setState(() {
           index=1;
         });
-        Navigator.pushNamed(context, Consts.routeWelcome);
+        Navigator.pushNamed(context, Constant.routeWelcome);
         return Future.value(false);
       },
       child: Stack(
