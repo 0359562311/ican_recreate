@@ -37,9 +37,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:278028596694:android:9a439b987280f479262077",
+        "mobilesdk_app_id": "1:278028596694:android:9e2602c1e8c4190e262077",
         "android_client_info": {
-          "package_name": "com.tankiem.icanproject"
+          "package_name": "com.tankiem.ican_project"
         }
       },
       "oauth_client": [

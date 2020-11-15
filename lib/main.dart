@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => Wrapper(),
         '/login': (context) => Login(),
         '/register': (context) => BlocProvider(create:(context) => RegisterBloc(), child: Register(),),
-        '/home': (context) => WelcomeScreen()
+        '/home': (context) => Container()
       },
     );
   }
@@ -51,7 +51,7 @@ class Wrapper extends StatelessWidget {
         if(sp.hasData){
           if(sp.data.getString(Constant.shared_preference_uid) != null){
             CloudService.currentUserUID = sp.data.getString(Constant.shared_preference_uid);
-            return WelcomeScreen();
+            return Container();
           }
           else return BlocProvider(create:(context) => LoginBloc());
         }
