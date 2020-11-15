@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ican_project/consts.dart';
 import 'package:ican_project/custom/custom_layout.dart';
+import 'package:ican_project/register/register_bloc.dart';
 import 'package:ican_project/register/register_state.dart';
 
 /// RegisterScreen
@@ -21,7 +22,8 @@ class Register extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer(
+    return BlocConsumer<RegisterBloc,RegisterState>(
+      listener: (context,state){},
       builder: (context,state){
         if(state is RegisterLoadingState)
           return SpinKitChasingDots(color: Colors.blue.shade800);

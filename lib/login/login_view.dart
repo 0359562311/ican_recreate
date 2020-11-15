@@ -22,7 +22,7 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _bloc = BlocProvider.of(context);
-    return BlocConsumer(
+    return BlocConsumer<LoginBloc,LoginState>(
       listener: (context,state){
         if(state is LoginErrorState){
           Scaffold.of(context).showSnackBar(

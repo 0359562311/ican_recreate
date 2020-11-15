@@ -5,10 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'consts.dart';
-// import 'package:icanuser/app/practice.dart';
-// import 'package:icanuser/app/profile.dart';
-// import 'package:icanuser/consts.dart';
-// import 'chat.dart';
 
 
 /// WelcomeScreen

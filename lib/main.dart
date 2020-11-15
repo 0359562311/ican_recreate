@@ -31,12 +31,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Scaffold(),
       routes: {
         '/': (context) => Wrapper(),
         '/login': (context) => Login(),
         '/register': (context) => BlocProvider(create:(context) => RegisterBloc(), child: Register(),),
-        '/home': (context) => Container()
+        '/welcome': (context) => Container(),
       },
     );
   }
@@ -53,7 +52,7 @@ class Wrapper extends StatelessWidget {
             CloudService.currentUserUID = sp.data.getString(Constant.shared_preference_uid);
             return Container();
           }
-          else return BlocProvider(create:(context) => LoginBloc());
+          else return BlocProvider(create:(context) => LoginBloc(), child: Login());
         }
         return CircularProgressIndicator();
       },
