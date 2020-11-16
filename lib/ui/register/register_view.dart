@@ -4,53 +4,85 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ican_project/consts.dart';
 import 'package:ican_project/custom/custom_layout.dart';
-import 'package:ican_project/register/register_bloc.dart';
-import 'package:ican_project/register/register_state.dart';
+import 'package:ican_project/model/custom_user.dart';
+import 'package:ican_project/ui/register/register_bloc.dart';
+import 'package:ican_project/ui/register/register_event.dart';
+import 'package:ican_project/ui/register/register_state.dart';
 
 /// RegisterScreen
-class Register extends StatelessWidget {
+class Register extends StatefulWidget {
+  @override
+  _RegisterState createState() => _RegisterState();
+}
+
+class _RegisterState extends State<Register> {
   final passwordCondition = RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$');
+
   final emailRegex =
       RegExp(r'^[a-z][a-z0-9_\.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$');
+
   final phoneRegex = RegExp(r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$');
+
   final TextEditingController phoneController = TextEditingController();
+
   final TextEditingController fullNameController = TextEditingController();
+
   final TextEditingController emailController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  RegisterBloc _bloc;
+
+  @override
+  void dispose() {
+    super.dispose();
+    _bloc.close();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<RegisterBloc,RegisterState>(
-      listener: (context,state){},
-      builder: (context,state){
-        if(state is RegisterLoadingState)
+    _bloc = BlocProvider.of<RegisterBloc>(context);
+    return BlocConsumer<RegisterBloc, RegisterState>(
+      listener: (context, state) {
+        if (state is RegisterErrorState)
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => AlertDialog(
+                    content: Text(state.error),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text('Close'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      )
+                    ],
+                  )));
+        else if (state is RegisterSuccessfulState)
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => AlertDialog(
+                    content: Text("Register successfully."),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text('Close'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      )
+                    ],
+                  )));
+      },
+      builder: (context, state) {
+        if (state is RegisterLoadingState)
           return SpinKitChasingDots(color: Colors.blue.shade800);
-        else if(state is RegisterErrorState)
-          return AlertDialog(
-            content: Text(state.error),
-            actions: <Widget>[
-              FlatButton(
-                child: Text('Close'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              )
-            ],
-          );
-        else if(state is RegisterSuccessfulState)
-          return AlertDialog(
-            content: Text("Register successfully"),
-            actions: <Widget>[
-              FlatButton(
-                child: Text('Close'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              )
-            ],
-          );
         return CustomLayout(
           title: "Đăng ký",
           leading: IconButton(
@@ -96,8 +128,8 @@ class Register extends StatelessWidget {
                         return val.isEmpty ? "Nhập vào họ tên" : null;
                       },
                       style: TextStyle(color: Colors.white),
-                      decoration:
-                      buildInputDecoration().copyWith(labelText: "Họ và tên"),
+                      decoration: buildInputDecoration()
+                          .copyWith(labelText: "Họ và tên"),
                     ),
                   ),
                   SizedBox(height: 20),
@@ -124,6 +156,7 @@ class Register extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 25),
                     child: TextFormField(
+                      controller: emailController,
                       validator: (val) {
                         return emailRegex.hasMatch(val) && val != null
                             ? null
@@ -131,7 +164,7 @@ class Register extends StatelessWidget {
                       },
                       style: TextStyle(color: Colors.white),
                       decoration:
-                      buildInputDecoration().copyWith(labelText: "Email"),
+                          buildInputDecoration().copyWith(labelText: "Email"),
                     ),
                   ),
                   SizedBox(height: 20),
@@ -140,6 +173,7 @@ class Register extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 25),
                     child: TextFormField(
+                      controller: passwordController,
                       obscureText: true,
                       validator: (val) {
                         return passwordCondition.hasMatch(val)
@@ -151,21 +185,22 @@ class Register extends StatelessWidget {
                         errorBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(50)),
                             borderSide:
-                            BorderSide(width: 2, color: Colors.redAccent)),
+                                BorderSide(width: 2, color: Colors.redAccent)),
                         focusedErrorBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(50)),
-                            borderSide:
-                            BorderSide(width: 2, color: Colors.lightBlue[800])),
+                            borderSide: BorderSide(
+                                width: 2, color: Colors.lightBlue[800])),
                         contentPadding: EdgeInsets.only(left: 20),
                         labelText: "Mật khẩu",
                         alignLabelWithHint: true,
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(50)),
-                            borderSide: BorderSide(width: 2, color: Colors.white)),
+                            borderSide:
+                                BorderSide(width: 2, color: Colors.white)),
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(50)),
-                            borderSide:
-                            BorderSide(width: 2, color: Colors.lightBlue[800])),
+                            borderSide: BorderSide(
+                                width: 2, color: Colors.lightBlue[800])),
                         labelStyle: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -176,9 +211,12 @@ class Register extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 25),
                     child: TextFormField(
+                      controller: confirmPasswordController,
                       obscureText: true,
                       validator: (val) {
-                        return passwordController.text == val ? null : "mật khẩu không khớp";
+                        return passwordController.text == val
+                            ? null
+                            : "mật khẩu không khớp";
                       },
                       style: TextStyle(color: Colors.white),
                       decoration: InputDecoration(
@@ -187,23 +225,26 @@ class Register extends StatelessWidget {
                         alignLabelWithHint: true,
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(50)),
-                            borderSide: BorderSide(width: 2, color: Colors.white)),
+                            borderSide:
+                                BorderSide(width: 2, color: Colors.white)),
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(50)),
-                            borderSide:
-                            BorderSide(width: 2, color: Colors.lightBlue[800])),
+                            borderSide: BorderSide(
+                                width: 2, color: Colors.lightBlue[800])),
                         errorBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(50)),
                             borderSide:
-                            BorderSide(width: 2, color: Colors.redAccent)),
+                                BorderSide(width: 2, color: Colors.redAccent)),
                         focusedErrorBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(50)),
-                            borderSide:
-                            BorderSide(width: 2, color: Colors.lightBlue[800])),
+                            borderSide: BorderSide(
+                                width: 2, color: Colors.lightBlue[800])),
                         labelStyle: TextStyle(color: Colors.white),
                       ),
                     ),
                   ),
+
+                  /// register button
                   Padding(
                     padding: EdgeInsets.fromLTRB(60, 45, 60, 0),
                     child: RaisedButton(
@@ -211,7 +252,14 @@ class Register extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30),
                       ),
                       onPressed: () async {
-                        if (_formKey.currentState.validate()) {}
+                        if (_formKey.currentState.validate()) {
+                          CustomUser user = CustomUser(
+                              email: emailController.text,
+                              password: passwordController.text,
+                              fullName: fullNameController.text,
+                              phoneNumber: phoneController.text);
+                          _bloc.add(RegisterWithEmailAndPasswordEvent(user));
+                        }
                       },
                       textColor: Colors.white,
                       padding: EdgeInsets.all(0.0),
@@ -228,7 +276,8 @@ class Register extends StatelessWidget {
                         ),
                         padding: EdgeInsets.all(10.0),
                         child: Center(
-                            child: Text('Đăng ký', style: TextStyle(fontSize: 20))),
+                            child: Text('Đăng ký',
+                                style: TextStyle(fontSize: 20))),
                       ),
                     ),
                   ),

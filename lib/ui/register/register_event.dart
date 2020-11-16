@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:ican_project/model/custom_user.dart';
 
 abstract class RegisterEvent{
   const RegisterEvent();
@@ -9,14 +10,13 @@ class RegisterInitEvent extends RegisterEvent{
 }
 
 class RegisterWithEmailAndPasswordEvent extends RegisterEvent implements Equatable{
-  final String email;
-  final String password;
+  CustomUser user;
 
-  const RegisterWithEmailAndPasswordEvent(this.email, this.password);
+  RegisterWithEmailAndPasswordEvent(this.user);
 
   @override
   // TODO: implement props
-  List<Object> get props => [email,password];
+  List<Object> get props => [user];
 
   @override
   // TODO: implement stringify

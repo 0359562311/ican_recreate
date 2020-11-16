@@ -8,7 +8,7 @@ abstract class Constant{
 
   static const String routeInitial = '/initial';
 
-  static const String routeLogin = '/login';
+  static const String routeLogin = '/ui.login';
 
   static const String routePasswordReset = '/password_reset';
 
@@ -20,7 +20,7 @@ abstract class Constant{
 
   static const String routeForgot_password = '/forgot_password';
 
-  static const String routeRegister = '/register';
+  static const String routeRegister = '/ui.register';
 
   static const String routeWelcome = '/welcome';
 

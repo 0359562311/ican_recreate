@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ican_project/register/register_event.dart';
-import 'package:ican_project/register/register_state.dart';
+import 'package:ican_project/firebase_service/cloud_service.dart';
+import 'package:ican_project/ui/register/register_event.dart';
+import 'package:ican_project/ui/register/register_state.dart';
 import 'package:ican_project/util/firebase_eception_conveter.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent,RegisterState>{
@@ -18,7 +19,13 @@ class RegisterBloc extends Bloc<RegisterEvent,RegisterState>{
     }else if(event is RegisterWithEmailAndPasswordEvent){
       yield RegisterLoadingState();
       try {
-        await _auth.createUserWithEmailAndPassword(email: event.email, password: event.password);
+        UserCredential credential =
+          await _auth.createUserWithEmailAndPassword(
+              email: event.user.email,
+              password: event.user.password
+          );
+        await CloudService.addUserInformation(event.user..uid = credential.user.uid);
+        yield RegisterSuccessfulState();
       } on FirebaseAuthException catch (e) {
         // TODO
         yield RegisterErrorState(FirebaseExceptionConverter.getErrorMessage(e.code));

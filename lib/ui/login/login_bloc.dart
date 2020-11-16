@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ican_project/firebase_service/cloud_service.dart';
-import 'package:ican_project/login/login_event.dart';
-import 'package:ican_project/login/login_state.dart';
+
+import 'login_event.dart';
+import 'login_state.dart';
 
 
 class LoginBloc extends Bloc<LoginEvent,LoginState>{

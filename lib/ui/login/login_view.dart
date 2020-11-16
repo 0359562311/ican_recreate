@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ican_project/custom/custom_layout.dart';
-import 'package:ican_project/login/login_bloc.dart';
-import 'package:ican_project/login/login_event.dart';
-import 'package:ican_project/login/login_state.dart';
 
-import '../consts.dart';
+import '../../consts.dart';
+import 'login_bloc.dart';
+import 'login_event.dart';
+import 'login_state.dart';
 
 // ignore: must_be_immutable
 class Login extends StatelessWidget {
