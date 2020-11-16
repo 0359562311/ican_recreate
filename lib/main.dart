@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ican_project/firebase_service/cloud_service.dart';
-import 'package:ican_project/login/login_bloc.dart';
-import 'package:ican_project/register/register_bloc.dart';
-import 'package:ican_project/welcome.dart';
-import 'package:ican_project/register/register_view.dart';
+import 'package:ican_project/ui/login/login_bloc.dart';
+import 'package:ican_project/ui/login/login_view.dart';
+import 'package:ican_project/ui/register/register_bloc.dart';
+import 'package:ican_project/ui/register/register_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'consts.dart';
-import 'login/login_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,9 +32,9 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         '/': (context) => Wrapper(),
-        '/login': (context) => Login(),
-        '/register': (context) => BlocProvider(create:(context) => RegisterBloc(), child: Register(),),
-        '/welcome': (context) => Container(),
+        Constant.routeLogin: (context) => Login(),
+        Constant.routeRegister: (context) => BlocProvider(create:(context) => RegisterBloc(), child: Register(),),
+        Constant.routeWelcome: (context) => Container(),
       },
     );
   }
@@ -52,7 +51,7 @@ class Wrapper extends StatelessWidget {
             CloudService.currentUserUID = sp.data.getString(Constant.shared_preference_uid);
             return Container();
           }
-          else return BlocProvider(create:(context) => LoginBloc(), child: Login());
+          else return BlocProvider(create:(context) => LoginBloc(), child: Login(),);
         }
         return CircularProgressIndicator();
       },
