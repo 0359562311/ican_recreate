@@ -25,12 +25,23 @@ class Login extends StatelessWidget {
     return BlocConsumer<LoginBloc,LoginState>(
       listener: (context,state){
         if(state is LoginErrorState){
-          Scaffold.of(context).showSnackBar(
-            SnackBar(content: Text(state.errorMessage))
-          );
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => AlertDialog(
+                    content: Text(state.errorMessage),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text('Close'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      )
+                    ],
+                  )));
         }
-        else{
-          Navigator.pushReplacementNamed(context, '/home');
+        else if(state is LoginCompleteState){
+          Navigator.pushReplacementNamed(context, Constant.routeWelcome);
         }
       },
       builder: (context,state){

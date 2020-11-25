@@ -1,10 +1,7 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import 'consts.dart';
+import 'package:ican_project/ui/subject_chooser.dart';
 
 
 /// WelcomeScreen
@@ -14,51 +11,16 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  int index = 1;
+  int index = 0;
 
   List<Widget> listChildWidget = [
-    // Chat(),
-    // PracticeScreen(),
-    // Profile(),
+    SubjectChooser(),
+    Container(child: Text("page 3"),),
   ];
 
-  Future<bool> pressedBack(){
-    return showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text("Thoát khỏi ứng dụng?"),
-          actions: <Widget>[
-            FlatButton(
-              child: Text("Hủy",
-                style: TextStyle(
-                    fontSize: 20
-                ),
-              ),
-              onPressed: () => Navigator.pop(context,false),
-            ),
-            FlatButton(
-              child: Text("Thoát",
-                style: TextStyle(
-                    fontSize: 20
-                ),
-              ),
-              onPressed: () => exit(0),
-            ),
-          ],
-        )
-    );
-  }
   @override
   Widget build(BuildContext context) {
-    return  WillPopScope(
-      onWillPop: index==1?pressedBack:(){
-        setState(() {
-          index=1;
-        });
-        Navigator.pushNamed(context, Constant.routeWelcome);
-        return Future.value(false);
-      },
-      child: Stack(
+    return  Stack(
         alignment: Alignment.topLeft,
         children: [
           /// Background
@@ -79,8 +41,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ],
           )
         ],
-      ),
-    );
+      );
   }
   Widget _getStackScreen() {
     return Expanded(
@@ -95,15 +56,36 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
+        // FlatButton(
+        //   child: Column(
+        //     children: [
+        //       SvgPicture.asset(
+        //         'images/svg_images/tro_truyen.svg',
+        //         height: 35,
+        //         color: index == 0? Colors.white:Colors.white30,
+        //       ),
+        //       Text("Trò truyện", style: TextStyle(
+        //           color: index == 0? Colors.white:Colors.white30,
+        //           fontSize: 13,
+        //           fontWeight: FontWeight.w500
+        //       ),),
+        //     ],
+        //   ),
+        //   onPressed: (){
+        //     setState(() {
+        //       index = 0;
+        //     });
+        //   },
+        // ),
         FlatButton(
           child: Column(
             children: [
               SvgPicture.asset(
-                'images/svg_images/tro_truyen.svg',
+                'images/svg_images/luyen_tap.svg',
                 height: 35,
                 color: index == 0? Colors.white:Colors.white30,
               ),
-              Text("Trò truyện", style: TextStyle(
+              Text("Luyện tập", style: TextStyle(
                   color: index == 0? Colors.white:Colors.white30,
                   fontSize: 13,
                   fontWeight: FontWeight.w500
@@ -120,11 +102,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           child: Column(
             children: [
               SvgPicture.asset(
-                'images/svg_images/luyen_tap.svg',
+                'images/svg_images/ca_nhan.svg',
                 height: 35,
                 color: index == 1? Colors.white:Colors.white30,
               ),
-              Text("Luyện tập", style: TextStyle(
+              Text("Cá nhân", style: TextStyle(
                   color: index == 1? Colors.white:Colors.white30,
                   fontSize: 13,
                   fontWeight: FontWeight.w500
@@ -134,27 +116,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           onPressed: (){
             setState(() {
               index = 1;
-            });
-          },
-        ),
-        FlatButton(
-          child: Column(
-            children: [
-              SvgPicture.asset(
-                'images/svg_images/ca_nhan.svg',
-                height: 35,
-                color: index == 2? Colors.white:Colors.white30,
-              ),
-              Text("Cá nhân", style: TextStyle(
-                  color: index == 2? Colors.white:Colors.white30,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w500
-              ),),
-            ],
-          ),
-          onPressed: (){
-            setState(() {
-              index = 2;
             });
           },
         ),

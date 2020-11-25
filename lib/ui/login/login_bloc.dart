@@ -15,12 +15,11 @@ class LoginBloc extends Bloc<LoginEvent,LoginState>{
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
-    print("map event $event");
     if(event is LoginWithEmailAndPassword){
       try {
         yield LoginLoadingState();
         var userCredential =  await _auth.signInWithEmailAndPassword(email: event.email, password: event.password);
-        CloudService.currentUserUID = userCredential.user.uid;
+        await CloudService.getCurrentUserInFormation(userCredential.user.uid);
         yield LoginCompleteState();
       } on FirebaseAuthException catch (e) {
         // TODO

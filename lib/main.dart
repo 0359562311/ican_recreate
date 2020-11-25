@@ -7,6 +7,7 @@ import 'package:ican_project/ui/login/login_bloc.dart';
 import 'package:ican_project/ui/login/login_view.dart';
 import 'package:ican_project/ui/register/register_bloc.dart';
 import 'package:ican_project/ui/register/register_view.dart';
+import 'package:ican_project/ui/welcome.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'consts.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => Wrapper(),
         Constant.routeLogin: (context) => Login(),
         Constant.routeRegister: (context) => BlocProvider(create:(context) => RegisterBloc(), child: Register(),),
-        Constant.routeWelcome: (context) => Container(),
+        Constant.routeWelcome: (context) => WelcomeScreen(),
       },
     );
   }
@@ -48,7 +49,7 @@ class Wrapper extends StatelessWidget {
       builder: (context,sp){
         if(sp.hasData){
           if(sp.data.getString(Constant.shared_preference_uid) != null){
-            CloudService.currentUserUID = sp.data.getString(Constant.shared_preference_uid);
+            CloudService.currentUser.uid = sp.data.getString(Constant.shared_preference_uid);
             return Container();
           }
           else return BlocProvider(create:(context) => LoginBloc(), child: Login(),);

@@ -6,6 +6,14 @@ abstract class Constant{
 
   static const Color buttonColor2 = Color(0xFF37D8B9);
 
+  static const Color mathBackground = Color(0xFFFF676A);
+
+  static const Color physicsBackground = Color(0xFF7A54FF);
+
+  static const Color chemistryBackground = Color(0xFFFF8F61);
+
+  static const Color englishBackground = Color(0xFF29C3FF);
+
   static const String routeInitial = '/initial';
 
   static const String routeLogin = '/ui.login';
@@ -32,7 +40,7 @@ abstract class Constant{
 
   static const String routeEditProfile3 = '/edit_profile_3';
 
-  static const String mathematics  = '/mathematics';
+  static const String gradeChooser  = '/grade';
 
   static const String help = '/help';
 

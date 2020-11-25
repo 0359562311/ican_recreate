@@ -1,10 +1,12 @@
 class CustomUser{
   String uid;
-  final String fullName;
-  final String phoneNumber;
-  final String email;
-  final String password;
+  String fullName;
+  String phoneNumber;
+  String email;
+  String password;
+  String photoURL;
 
   CustomUser(
-      {this.uid, this.fullName, this.phoneNumber, this.email, this.password});
+      {this.uid, this.fullName, this.phoneNumber, this.email, this.password, this.photoURL});
+
 }
