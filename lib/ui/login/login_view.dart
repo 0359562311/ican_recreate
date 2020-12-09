@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ican_project/custom/custom_layout.dart';
+import 'package:ican_project/firebase_service/cloud_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../consts.dart';
 import 'login_bloc.dart';
@@ -23,7 +25,7 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     _bloc = BlocProvider.of(context);
     return BlocConsumer<LoginBloc,LoginState>(
-      listener: (context,state){
+      listener: (context,state) async {
         if(state is LoginErrorState){
           Navigator.push(
               context,
@@ -41,7 +43,9 @@ class Login extends StatelessWidget {
                   )));
         }
         else if(state is LoginCompleteState){
-          Navigator.pushReplacementNamed(context, Constant.routeWelcome);
+          var sp = await SharedPreferences.getInstance();
+          sp.setString(Constants.sp_logged_in, CloudService.currentUser.uid);
+          Navigator.pushReplacementNamed(context, Constants.routeWelcome);
         }
       },
       builder: (context,state){
@@ -183,7 +187,7 @@ class Login extends StatelessWidget {
                             onPressed: () {
                               print("pressed Quen mat khau");
                               Navigator.pushNamed(
-                                  context, Constant.routeForgot_password);
+                                  context, Constants.routeForgot_password);
                             },
                           ),
                         ),
@@ -198,8 +202,8 @@ class Login extends StatelessWidget {
                                 begin: Alignment.centerLeft,
                                 end: Alignment.centerRight,
                                 colors: [
-                                  Constant.buttonColor1,
-                                  Constant.buttonColor2,
+                                  Constants.buttonColor1,
+                                  Constants.buttonColor2,
                                 ])),
                         child: FlatButton(
                           child: Text(
@@ -247,7 +251,7 @@ class Login extends StatelessWidget {
                                 ),
                                 onPressed: () {
                                   Navigator.pushNamed(
-                                      context, Constant.routeRegister);
+                                      context, Constants.routeRegister);
                                 },
                               ),
                               Padding(

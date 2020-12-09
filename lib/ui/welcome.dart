@@ -56,27 +56,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        // FlatButton(
-        //   child: Column(
-        //     children: [
-        //       SvgPicture.asset(
-        //         'images/svg_images/tro_truyen.svg',
-        //         height: 35,
-        //         color: index == 0? Colors.white:Colors.white30,
-        //       ),
-        //       Text("Trò truyện", style: TextStyle(
-        //           color: index == 0? Colors.white:Colors.white30,
-        //           fontSize: 13,
-        //           fontWeight: FontWeight.w500
-        //       ),),
-        //     ],
-        //   ),
-        //   onPressed: (){
-        //     setState(() {
-        //       index = 0;
-        //     });
-        //   },
-        // ),
         FlatButton(
           child: Column(
             children: [

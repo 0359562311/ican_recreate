@@ -8,4 +8,9 @@ class Question{
 
   Question({this.question, this.a, this.b, this.c, this.d,
     this.rightAnswer});
+
+  @override
+  String toString() {
+    return 'Question{question: $question, a: $a, b: $b, c: $c, d: $d, rightAnswer: $rightAnswer}';
+  }
 }

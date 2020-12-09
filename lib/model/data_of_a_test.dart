@@ -2,22 +2,14 @@
 import 'package:ican_project/firebase_service/cloud_service.dart';
 import 'package:ican_project/model/question.dart';
 
-class DataOfATest{
+class Test{
   String subject;
   String grade;
   String testId;
-  bool isDone;
-  int testSize;
+  List<Question> listQuestions = [];
+  List<int> userAnswer = [];
 
-  List<Question> listQuestions = List();
-
-
-  DataOfATest({this.subject, this.grade, this.testId});
-
-  Future<DataOfATest> getListQuestion() async{
-    var res = await CloudService.getDataOfATest(this);
-    return res;
-  }
+  Test({this.subject, this.grade, this.testId, this.listQuestions, this.userAnswer});
 
 }
 

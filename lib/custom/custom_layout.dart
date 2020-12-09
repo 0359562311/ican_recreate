@@ -5,12 +5,15 @@ class CustomLayout extends StatelessWidget {
   final String title;
   final Widget body;
   final List<Widget> bottomBar;
+  final double titleFontSize;
 
   const CustomLayout({
-    Key key,Widget leading, String title, Widget body, this.bottomBar
-  }):leading = leading ?? const SizedBox(height: 0,),
+    Key key,Widget leading, String title, Widget body, this.bottomBar,
+    double titleFontSize
+  }):leading = leading ?? const SizedBox(),
     title = title ?? "",
     body = body ?? const SizedBox(),
+    titleFontSize = titleFontSize ?? 24,
     super(key: key)
   ;
 
@@ -38,19 +41,26 @@ class CustomLayout extends StatelessWidget {
                   height: (title == "")? 0 : 50,
                   width: MediaQuery.of(context).size.width,
                   child: Stack(
-                    alignment: Alignment.topLeft,
+                    alignment: Alignment.centerLeft,
                     children: [
-                      leading,
-                      Center(
-                        child: Text(
-                          title,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24
+                      Padding(
+                        padding: const EdgeInsets.only(top:4.0),
+                        child: Center(
+                          child: Text(
+                            title,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: titleFontSize
+                            ),
                           ),
                         ),
-                      )
+                      ),
+                      Container(
+                        padding: const EdgeInsets.only(left:4.0,top: 4.0),
+                        child: leading,
+                      ),
                     ],
                   ),
                 ),
@@ -60,11 +70,12 @@ class CustomLayout extends StatelessWidget {
                 SizedBox(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: bottomBar == null ? [SizedBox()]:bottomBar,
+                    children: bottomBar == null ? [const SizedBox()]:bottomBar,
                   ),
                 )
               ],
-            )
+            ),
+
           ],
         ),
       ),

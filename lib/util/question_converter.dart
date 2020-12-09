@@ -1,7 +1,7 @@
 import 'package:ican_project/model/question.dart';
 
 class QuestionConverter{
-  static List<Question> convert(List<Map> list){
+  static List<Question> convert(List<dynamic> list){
     List<Question> res = List();
     list.forEach((e) {
       res.add(Question(

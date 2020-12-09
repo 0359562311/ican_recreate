@@ -1,6 +1,22 @@
 import 'package:flutter/material.dart';
 
-abstract class Constant{
+abstract class Constants{
+
+  static const String sp_logged_in = "logged in";
+
+  static const Color grade6Color = Color(0xFF33A5F5);
+
+  static const Color grade7Color = Color(0xFF784FFF);
+
+  static const Color grade8Color = Color(0xFFFF48DF);
+
+  static const Color grade9Color = Color(0xFFFF8E46);
+
+  static const Color grade10Color = Color(0xFF4A75FF);
+
+  static const Color grade11Color = Color(0xFF2FD55E);
+
+  static const Color grade12Color = Color(0xFFFF6463);
 
   static const Color buttonColor1 = Color(0xFF5B77FF);
 
@@ -13,6 +29,16 @@ abstract class Constant{
   static const Color chemistryBackground = Color(0xFFFF8F61);
 
   static const Color englishBackground = Color(0xFF29C3FF);
+
+  static const Color listTestBackground = Color(0xFF3D4069);
+
+  static const Color listTestBorderItem = Color(0xFF33A5F5);
+
+  static const Color listTestIconColor = Color(0xFF33A7F9);
+
+  static const Color headerBackground = Color.fromRGBO(61, 64, 105, 0.5);
+
+  static const Color headerStroke = Color.fromRGBO(51, 165, 245, 1);
 
   static const String routeInitial = '/initial';
 
@@ -42,19 +68,15 @@ abstract class Constant{
 
   static const String gradeChooser  = '/grade';
 
-  static const String help = '/help';
+  static const String submitDialog  = '/submitDialog';
 
-  static const String testContent ='/testContent';
-
-  static const String introduce ='/introduce';
+  static const String test ='/test';
 
   static const String practice = '/practice';
 
   static const String logout = '/logout';
 
-  static const String chat = '/chat.dart';
-
-  static const String resultOfATest = '/13thScreen';
+  static const String resultOfATest = '/result';
 
   static const String profile = '/profile';
 
