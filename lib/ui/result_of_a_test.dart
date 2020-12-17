@@ -158,7 +158,10 @@ class ResultOfATest extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 15.0),
                 child: FlatButton(
                     onPressed:(){
-                      Navigator.pop(context,"test result");
+                      Navigator.pushNamedAndRemoveUntil(context, Constants.test,
+                        (route) => route.settings.name == Constants.routeListTest,
+                        arguments: test..hasDone = true
+                      );
                     },
                     child:  Text(
                       "Xem kết quả",

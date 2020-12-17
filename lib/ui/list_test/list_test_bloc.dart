@@ -15,11 +15,12 @@ class ListTestBloc extends Bloc<ListTestEvent, ListTestState>{
       try {
         yield ListTestLoading();
         List<bool> items = await CloudService.getDoneOrNot(event.subject,event.grade);
-        print(items.length);
         yield ListTestLoadedState(items);
       } on FirebaseException catch (e) {
         // TODO
         yield ListTestErrorState(FirebaseExceptionConverter.getErrorMessage(e.code));
+      } on Exception catch (e){
+        yield ListTestErrorState(e.toString());
       }
     }
   }

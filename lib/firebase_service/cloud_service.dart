@@ -47,21 +47,27 @@ class CloudService {
   static Future<List<bool>> getDoneOrNot(String subject, String grade) async {
     var docRef = await _cloudInstance.collection("tests").doc(subject).get();
     int numberOfTest = docRef.get(grade);
-    List<bool> res = [];
-    var colRef = _cloudInstance
-        .collection("users")
-        .doc(CloudService.currentUser.uid)
-        .collection("hasDone");
+    List<bool> res = List.filled(numberOfTest, false);
+    CollectionReference colRef;
+    try {
+      colRef = _cloudInstance
+            .collection("users")
+            .doc(CloudService.currentUser.uid)
+            .collection("hasDone");
+    } on Exception catch (e) {
+      // TODO
+      return res;
+    }
     for (int i = 1; i <= numberOfTest; i++) {
       try {
-        docRef = await colRef.doc(subject + grade + 1.toString()).get();
-        res.add(true);
-      } on FirebaseException catch (e) {
-        // TODO
-        print(e);
-        res.add(false);
+        var t = await colRef.doc(subject + grade + i.toString()).get();
+        if(t.exists)
+          res[i-1] = true;
+      } on Exception catch (e) {
+        res[i-1] = false;
       }
     }
+    print(res);
     return res;
   }
 
@@ -74,6 +80,13 @@ class CloudService {
     var doc = await docRef.get();
     print(doc.get("data"));
     aTest.listQuestions = QuestionConverter.convert(doc.get("data"));
+
+    if(aTest.hasDone) {
+      docRef = _cloudInstance.collection("users").doc(currentUser.uid).collection("hasDone")
+          .doc(aTest.subject + aTest.grade + aTest.testId);
+      doc = await docRef.get();
+      aTest.userAnswer = (doc.get("answer") as List).map((e) => int.parse(e.toString())).toList();
+    }
     return aTest;
   }
 

@@ -6,10 +6,11 @@ class Test{
   String subject;
   String grade;
   String testId;
+  bool hasDone;
   List<Question> listQuestions = [];
   List<int> userAnswer = [];
 
-  Test({this.subject, this.grade, this.testId, this.listQuestions, this.userAnswer});
+  Test({this.subject, this.grade, this.testId, this.listQuestions, this.userAnswer, this.hasDone});
 
 }
 

@@ -27,7 +27,7 @@ class _ListTestState extends State<ListTest> {
 
   Test data;
 
-  List<bool> listItem = [];
+  List<bool> states = [];
 
   @override
   void initState() {
@@ -73,7 +73,7 @@ class _ListTestState extends State<ListTest> {
                   )));
         }
         else if(state is ListTestLoadedState){
-          listItem = state.listItems;
+          states = state.listItems;
         }
       },
       builder: (context, state){
@@ -137,7 +137,7 @@ class _ListTestState extends State<ListTest> {
               ///ListTest
               Expanded(
                 child: ListView.builder(
-                  itemCount: listItem.length,
+                  itemCount: states.length,
                   itemBuilder: (BuildContext context, int index) =>
                       buildListTest(context, index),
                 ),
@@ -154,11 +154,11 @@ class _ListTestState extends State<ListTest> {
     return Padding(
       padding: EdgeInsets.fromLTRB(27, 13, 27, 0),
       child: InkWell(
-        onTap: () {
-          Navigator.pushNamed(context, Constants.test, arguments: {
-            "test": data..testId = '${index+1}',
-            "hasDone": listItem[index]
-          });
+        onTap: () async {
+          await Navigator.pushNamed(context, Constants.test, arguments:
+            data..testId = '${index+1}'
+            ..hasDone = states[index]
+          );
         },
         child: Container(
           height: 53,
@@ -175,9 +175,9 @@ class _ListTestState extends State<ListTest> {
                     Padding(
                       padding: EdgeInsets.fromLTRB(7, 0, 10, 0),
                       child: SvgPicture.asset(
-                        listItem[index]?'images/svg_images/tich_hoan_thanh.svg':'images/svg_images/bai_test.svg',
+                        states[index]?'images/svg_images/tich_hoan_thanh.svg':'images/svg_images/bai_test.svg',
                         width: 50,
-                        color: Constants.listTestIconColor,
+                        color: states[index]?Colors.green : Constants.listTestIconColor,
                       ),
                     ),
                     Text(

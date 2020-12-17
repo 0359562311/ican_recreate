@@ -62,20 +62,21 @@ class Wrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<SharedPreferences>(
-      future: SharedPreferences.getInstance(),
-      builder: (context,sp){
-        if(sp.hasData){
-          if(sp.data.getString(Constants.sp_logged_in) != null){
-            CloudService.currentUser.uid = sp.data.getString(Constants.sp_logged_in);
-            _fetchUserInformation(context);
-            return SpinKitFoldingCube(color: Colors.blue.shade200,);
-          }
-          else return BlocProvider(create:(context) => LoginBloc(), child: Login(),);
-        }
-        return SpinKitFoldingCube(color: Colors.blue.shade200,);
-      },
-    );
+    return BlocProvider(create:(context) => LoginBloc(), child: Login(),);
+    // return FutureBuilder<SharedPreferences>(
+    //   future: SharedPreferences.getInstance(),
+    //   builder: (context,sp){
+    //     if(sp.hasData){
+    //       if(sp.data.getString(Constants.sp_logged_in) != null){
+    //         CloudService.currentUser.uid = sp.data.getString(Constants.sp_logged_in);
+    //         _fetchUserInformation(context);
+    //         return SpinKitFoldingCube(color: Colors.blue.shade200,);
+    //       }
+    //       else return BlocProvider(create:(context) => LoginBloc(), child: Login(),);
+    //     }
+    //     return SpinKitFoldingCube(color: Colors.blue.shade200,);
+    //   },
+    // );
   }
 }
 

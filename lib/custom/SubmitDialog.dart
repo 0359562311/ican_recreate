@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:ican_project/consts.dart';
 import 'package:ican_project/firebase_service/cloud_service.dart';
+import 'package:ican_project/model/data_of_a_test.dart';
 
 class SubmitDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var passingData = ModalRoute.of(context).settings.arguments;
+    Test passingData = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       body: Container(
         color: Color(0xFF0c1330).withOpacity(0.9),
@@ -45,8 +46,7 @@ class SubmitDialog extends StatelessWidget {
                   onTap: () async {
                     CloudService.updateUserAnswer(passingData);
                     var t = await Navigator.pushReplacementNamed(context, Constants.resultOfATest, arguments: passingData);
-                    if(t == "test result")
-                      Navigator.pop(context,{"test result" : "test result"});
+                    print("submit result = " + t.toString());
                   },
                   child: Container(
                     margin: EdgeInsets.only(top: 30),
