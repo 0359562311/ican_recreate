@@ -269,8 +269,8 @@ class _RegisterState extends State<Register> {
                           borderRadius: BorderRadius.circular(30),
                           gradient: LinearGradient(
                             colors: <Color>[
-                              Constant.buttonColor1,
-                              Constant.buttonColor2,
+                              Constants.buttonColor1,
+                              Constants.buttonColor2,
                             ],
                           ),
                         ),
