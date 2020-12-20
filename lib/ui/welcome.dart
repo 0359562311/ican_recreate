@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ican_project/ui/result_of_all_tests/roat_view.dart';
 import 'package:ican_project/ui/subject_chooser.dart';
 
 
@@ -15,7 +16,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   List<Widget> listChildWidget = [
     SubjectChooser(),
-    Container(child: Text("page 3"),),
+    ROATView(),
   ];
 
   @override

@@ -60,11 +60,11 @@ abstract class Constants{
 
   static const String routeListTest = '/list_test';
 
-  static const String routeEditProfile1 = '/edit_profile_1';
+  static const String routeChangePassword = '/change_password';
 
-  static const String routeEditProfile2 = '/edit_profile_2';
+  static const String routeEditProfile = '/edit_profile';
 
-  static const String routeEditProfile3 = '/edit_profile_3';
+  static const String routeSetting = '/setting';
 
   static const String gradeChooser  = '/grade';
 
@@ -74,7 +74,7 @@ abstract class Constants{
 
   static const String practice = '/practice';
 
-  static const String logout = '/logout';
+  static const String routeLogout = '/logout';
 
   static const String resultOfATest = '/result';
 

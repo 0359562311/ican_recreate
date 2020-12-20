@@ -327,11 +327,11 @@ class ShowDialog{
       },
     );
   }
-  static void showErrorDialog(context, String errorMessage){
+  static void showMessageDialog(context, String errorMessage){
     showGeneralDialog(
       context: context,
       transitionDuration: Duration(milliseconds: 50),
-      pageBuilder: (_, __, ___) {
+      pageBuilder: (context, __, ___) {
         return Opacity(
           opacity: 0.9,
           child: Material(

@@ -21,10 +21,6 @@ class _RegisterState extends State<Register> {
   final emailRegex =
       RegExp(r'^[a-z][a-z0-9_\.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$');
 
-  final phoneRegex = RegExp(r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$');
-
-  final TextEditingController phoneController = TextEditingController();
-
   final TextEditingController fullNameController = TextEditingController();
 
   final TextEditingController emailController = TextEditingController();
@@ -54,35 +50,37 @@ class _RegisterState extends State<Register> {
               context,
               MaterialPageRoute(
                   builder: (context) => AlertDialog(
-                    content: Text(state.error),
-                    actions: <Widget>[
-                      FlatButton(
-                        child: Text('Close'),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      )
-                    ],
-                  )));
+                        content: Text(state.error),
+                        actions: <Widget>[
+                          FlatButton(
+                            child: Text('Close'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          )
+                        ],
+                      )));
         else if (state is RegisterSuccessfulState)
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => AlertDialog(
-                    content: Text("Register successfully."),
-                    actions: <Widget>[
-                      FlatButton(
-                        child: Text('Close'),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      )
-                    ],
-                  )));
+                        content: Text("Register successfully."),
+                        actions: <Widget>[
+                          FlatButton(
+                            child: Text('Close'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          )
+                        ],
+                      )));
       },
       builder: (context, state) {
         if (state is RegisterLoadingState)
-          return SpinKitChasingDots(color: Colors.blue.shade800);
+          return SpinKitChasingDots(
+            color: Colors.blue,
+          );
         return CustomLayout(
           title: "Đăng ký",
           leading: IconButton(
@@ -130,24 +128,6 @@ class _RegisterState extends State<Register> {
                       style: TextStyle(color: Colors.white),
                       decoration: buildInputDecoration()
                           .copyWith(labelText: "Họ và tên"),
-                    ),
-                  ),
-                  SizedBox(height: 20),
-
-                  /// phone number
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 25),
-                    child: TextFormField(
-                      keyboardType: TextInputType.number,
-                      controller: phoneController,
-                      validator: (val) {
-                        return phoneRegex.hasMatch(val)
-                            ? null
-                            : "Số điện thoại không hợp lệ";
-                      },
-                      style: TextStyle(color: Colors.white),
-                      decoration: buildInputDecoration()
-                          .copyWith(labelText: "Số điện thoại"),
                     ),
                   ),
                   SizedBox(height: 20),
@@ -256,8 +236,7 @@ class _RegisterState extends State<Register> {
                           CustomUser user = CustomUser(
                               email: emailController.text,
                               password: passwordController.text,
-                              fullName: fullNameController.text,
-                              phoneNumber: phoneController.text);
+                              fullName: fullNameController.text);
                           _bloc.add(RegisterWithEmailAndPasswordEvent(user));
                         }
                       },

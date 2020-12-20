@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ican_project/custom/custom_layout.dart';
+import 'package:ican_project/firebase_service/authentication_service.dart';
 import 'package:ican_project/firebase_service/cloud_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -43,8 +44,6 @@ class Login extends StatelessWidget {
                   )));
         }
         else if(state is LoginCompleteState){
-          var sp = await SharedPreferences.getInstance();
-          sp.setString(Constants.sp_logged_in, CloudService.currentUser.uid);
           Navigator.pushReplacementNamed(context, Constants.routeWelcome);
         }
       },

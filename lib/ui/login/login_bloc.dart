@@ -19,8 +19,10 @@ class LoginBloc extends Bloc<LoginEvent,LoginState>{
       try {
         yield LoginLoadingState();
         var userCredential =  await _auth.signInWithEmailAndPassword(email: event.email, password: event.password);
-        await CloudService.getCurrentUserInFormation(userCredential.user.uid);
-        yield LoginCompleteState();
+        if(!userCredential.user.emailVerified)
+          yield LoginErrorState("Bấm vào đường link xác nhận được gửi qua email.");
+        else
+          yield LoginCompleteState();
       } on FirebaseAuthException catch (e) {
         // TODO
         yield LoginErrorState(e.code);
