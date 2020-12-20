@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ican_project/consts.dart';
 import 'package:ican_project/custom/custom_layout.dart';
+import 'package:ican_project/firebase_service/authentication_service.dart';
 import 'package:ican_project/firebase_service/cloud_service.dart';
 import 'package:ican_project/firebase_service/storage_service.dart';
 import 'package:ican_project/model/data_of_a_test.dart';
@@ -23,7 +24,7 @@ class _SubjectChooserState extends State<SubjectChooser> {
             Padding(
               padding: const EdgeInsets.only(top: 10),
               child: Text(
-                "Welcome \n" + CloudService.currentUser.fullName,
+                "Welcome \n" + AuthService.currentUser.displayName,
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.white, fontSize: 24),
               ),
@@ -40,7 +41,7 @@ class _SubjectChooserState extends State<SubjectChooser> {
                 child: FutureBuilder(
                   future: StorageService.avatarURL,
                   builder: (context, snapshot) {
-                    if (snapshot.hasData) {
+                    if (snapshot.hasData && snapshot.data != null) {
                       return CircleAvatar(
                         backgroundImage: NetworkImage(
                           snapshot.data as String,

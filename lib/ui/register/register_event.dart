@@ -10,9 +10,9 @@ class RegisterInitEvent extends RegisterEvent{
 }
 
 class RegisterWithEmailAndPasswordEvent extends RegisterEvent implements Equatable{
-  CustomUser user;
+  final CustomUser user;
 
-  RegisterWithEmailAndPasswordEvent(this.user);
+  const RegisterWithEmailAndPasswordEvent(this.user);
 
   @override
   // TODO: implement props
