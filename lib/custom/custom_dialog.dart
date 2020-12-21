@@ -327,8 +327,8 @@ class ShowDialog{
       },
     );
   }
-  static void showMessageDialog(context, String errorMessage){
-    showGeneralDialog(
+  static Future showMessageDialog(context, String errorMessage){
+    return showGeneralDialog(
       context: context,
       transitionDuration: Duration(milliseconds: 50),
       pageBuilder: (context, __, ___) {

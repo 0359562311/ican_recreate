@@ -185,7 +185,7 @@ class _EditProfileState extends State<EditProfile> {
                           await AuthService.currentUser.updateProfile(displayName: fullName.text);
                         if(email.text != AuthService.currentUser.email) {
                           await AuthService.currentUser.verifyBeforeUpdateEmail(email.text);
-                          ShowDialog.showMessageDialog(context, "Xác nhận email mới trước khi đổi qua đường link xác nhận gửi qua email.");
+                          await ShowDialog.showMessageDialog(context, "Xác nhận email mới trước khi đổi qua đường link xác nhận gửi qua email.");
                         }
                         await AuthService.currentUser.reload();
                         ShowDialog.showMessageDialog(context, "Đổi thành công.");
